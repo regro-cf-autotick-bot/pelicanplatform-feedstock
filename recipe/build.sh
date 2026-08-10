@@ -2,6 +2,9 @@
 
 set -ex
 
+export CGO_ENABLED=0
+export CLIENT_TAGS="forceposix,client"
+
 # dynamically generate content
 GOARCH="" GOOS="" go generate ./...
 
@@ -20,13 +23,14 @@ LDFLAGS="
 go build \
   -a \
   -ldflags "${LDFLAGS}" \
-  -tags forceposix \
+  -tags ${CLIENT_TAGS} \
   -p ${CPU_COUNT} \
   -v \
   -o "${PREFIX}/bin/pelican" \
   ./cmd
 
 # generate the license pack
+export GOFLAGS="-tags=${CLIENT_TAGS}"
 go get ./...
 go-licenses save \
   --ignore "modernc.org/mathutil" \
