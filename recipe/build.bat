@@ -31,7 +31,7 @@ rem -- generate the license pack
 set "GOFLAGS=-tags=%CLIENT_TAGS%"
 go get ./...
 go-licenses save ^
-  --save_path license-files ^
+  --save_path client-licenses ^
   --ignore "modernc.org/mathutil" ^
   --ignore "github.com/jmespath/go-jmespath" ^
   --ignore "go.opentelemetry.io/otel/exporters/jaeger/internal/third_party/thrift/lib/go/thrift" ^
